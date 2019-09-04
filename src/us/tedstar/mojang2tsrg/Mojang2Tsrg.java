@@ -52,6 +52,8 @@ public class Mojang2Tsrg {
 
                     String className = parts[0].replaceAll("\\.", "/");
                     String obfName = parts[2].substring(0, parts[2].length() - 1);
+                    if(obfName.contains("."))
+                        obfName = obfName.replaceAll("\\.", "/");
 
                     classMap.put(className, obfName);
                 }
@@ -79,8 +81,8 @@ public class Mojang2Tsrg {
                     String parts[] = s.split(" ");
                     assert parts.length == 4;
 
-                    if(Character.isDigit(s.charAt(0))) { // This is a method.
-                        String returnType = parts[0].split(":")[2]; // Split line numbers.
+                    if(parts[1].endsWith(")")) { // This is a method.
+                        String returnType = parts[0].contains(":") ? parts[0].split(":")[2] : parts[0]; // Split line numbers.
                         String obfName = parts[3];
                         String methodName = parts[1].split("\\(")[0]; // Separate params from name.
                         String params = parts[1].split("\\(")[1];
@@ -103,6 +105,8 @@ public class Mojang2Tsrg {
 
                     String className = parts[0].replaceAll("\\.", "/");
                     String obfName = parts[2].substring(0, parts[2].length() - 1);
+                    if(obfName.contains("."))
+                        obfName = obfName.replaceAll("\\.", "/");
 
                     buf.write(obfName + " " + className + "\n"); // Write class entry.
                 }
