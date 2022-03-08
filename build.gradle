@@ -14,7 +14,8 @@ id 'maven-publish'
 
 }
 
-
+group 'com.github.AzarathMC'
+version '1.0.0'
 
 
 
